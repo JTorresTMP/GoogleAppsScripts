@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+    table, th, td {border: 1px solid black}
+    td {text-align: center}
+    th, td {padding: 10px}
+    </style>
+  </head>
+  <body>
+    <h2>Inventory Metrics</h2>
+    <p>
+    You'll be receiving this from now on every morning to
+    keep you up to date with inventory so you can review and decide if an order is needed.
+    (Work In Progress)
+    </p>
+    <hr style="margin-top: 30px" />
+    <table>
+    <tr>
+    <th>SKU</th>
+    <th>Current Inventory</th>
+    <th>Production Due Date</th>
+    <th>Suggested Re Order Amount</th>
+    </tr>
+    <? for (let i = 0; i < data.length; i++) { ?>
+      <tr>
+        <td><?= data[i].name ?></td>
+        <td><?= data[i].currentInventory ?></td>
+        <td><?= data[i].reOrderDate ?></td>
+        <td><?= data[i].reOrderPoint ?></td>
+      </tr>
+    <? } ?>
+    </table>
+    <hr style="margin-top: 30px" />
+    <p>See any bugs or issue with this email? Please reach out to me at (my email here)</p>
+  </body>
+</html>
+
+
