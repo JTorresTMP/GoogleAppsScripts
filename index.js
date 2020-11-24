@@ -1,7 +1,7 @@
 const sendEmailNotification = (email = 'myemailhere@gmail.com', subject = 'Whatever you want', skuArray) => {
     
-    const template = HtmlService.createTemplateFromFile('InventoryDigest')
-    template.data = skuArray;
+    const template = HtmlService.createTemplateFromFile('index')
+    template.data = skuArray; //data is a global variable available to index.html 
     const message = template.evaluate().getContent();
     
     MailApp.sendEmail({
@@ -21,7 +21,7 @@ const populateSKUArray = () => {
     const reOrderDates = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('MasterSKUsCalendar').getRange('P2:P30').getValues();
     let allData = [...skus, ...inventories, ...suggested, ...reOrderDates]; //Not needed
     skus.map(sku => {
-      let [title] = sku;
+      let [title] = sku; //need to destructure due to the way Google Sheets handles data
       master.push({name: title})
     })
   
@@ -29,6 +29,7 @@ const populateSKUArray = () => {
       let [current] = inven;
       for (let i = 0; i < master.length; i++) {
           if (i === index) {
+            //Object spread operator does not work on Google Apps Scripts
             master[i] = Object.assign(master[i], {currentInventory: current})
           }
       }
